@@ -9,6 +9,7 @@ import AuthorArticles from "./components/AuthorArticles";
 import EditArticle from './components/EditArticle'
 import WriteArticles from "./components/WriteArticles";
 import ArticleByID from "./components/ArticleByID";
+import Articles from "./components/Articles";
 import AdminProfile from './components/AdminProfile'
 import Unauthorized from "./components/Unauthorized";
 
@@ -32,6 +33,12 @@ function App() {
         {
           path: "login",
           element: <Login />,
+        },
+        {
+          path: "articles",
+          element: <ProtectedRoute allowedRoles={["USER", "AUTHOR", "ADMIN"]}>
+            <Articles />
+          </ProtectedRoute>,
         },
         {
           path: "user-profile",

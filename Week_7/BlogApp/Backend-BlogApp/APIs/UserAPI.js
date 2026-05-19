@@ -6,7 +6,7 @@ import {verifyToken} from '../middlewares/verifyToken.js'
 export const userApp = exp.Router()
 
 // read all article route
-userApp.get('/articles',verifyToken("USER"),async(req,res)=>{
+userApp.get('/articles',verifyToken("USER", "AUTHOR", "ADMIN"),async(req,res)=>{
     // get id of the user
     const userId = req.user?.id;
     // find user

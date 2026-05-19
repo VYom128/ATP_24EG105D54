@@ -1,7 +1,36 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useAuth } from "../stores/authStore";
 
 function Home() {
+  const navigate = useNavigate();
+  const { isAuthenticated, currentUser } = useAuth((state) => state);
+
+  const handleExploreArticles = (e) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+    
+    // Direct to the global articles page
+    navigate("/articles");
+  };
+
+  const handleStartWriting = (e) => {
+    e.preventDefault();
+    if (!isAuthenticated) {
+      navigate("/login");
+      return;
+    }
+
+    if (currentUser?.role === "AUTHOR") {
+      navigate("/author-profile/write-article");
+    } else {
+      navigate("/unauthorized");
+    }
+  };
+
   return (
     <div className="min-h-[80vh] flex items-center justify-center">
       <div className="text-center max-w-4xl px-6">
@@ -22,13 +51,13 @@ function Home() {
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-5 justify-center items-center">
-          <Link to="/register" className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-10 py-4 rounded-full hover:from-indigo-400 hover:to-purple-500 shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto text-center text-lg">
+          <button onClick={handleStartWriting} className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-10 py-4 rounded-full hover:from-indigo-400 hover:to-purple-500 shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto text-center text-lg cursor-pointer">
             Start Writing
-          </Link>
+          </button>
 
-          <Link to="/" className="bg-[#151a2a] border border-[#222b40] text-[#cbd5e1] font-semibold px-10 py-4 rounded-full hover:bg-[#1e293b] hover:border-[#334155] hover:text-white transition-all duration-300 w-full sm:w-auto text-center text-lg hover:-translate-y-1 shadow-lg shadow-black/20">
+          <button onClick={handleExploreArticles} className="bg-[#151a2a] border border-[#222b40] text-[#cbd5e1] font-semibold px-10 py-4 rounded-full hover:bg-[#1e293b] hover:border-[#334155] hover:text-white transition-all duration-300 w-full sm:w-auto text-center text-lg hover:-translate-y-1 shadow-lg shadow-black/20 cursor-pointer">
             Explore Articles
-          </Link>
+          </button>
         </div>
 
         <div className="mt-20 pt-10 border-t border-[#222b40]">
