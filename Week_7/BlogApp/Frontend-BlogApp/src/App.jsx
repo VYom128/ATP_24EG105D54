@@ -15,8 +15,16 @@ import Unauthorized from "./components/Unauthorized";
 
 import {Toaster} from 'react-hot-toast'
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useEffect } from "react";
+import { useTheme } from "./stores/themeStore";
 
 function App() {
+  const { initTheme } = useTheme();
+
+  useEffect(() => {
+    initTheme();
+  }, [initTheme]);
+
   const routerObj = createBrowserRouter([
     {
       path: "/",

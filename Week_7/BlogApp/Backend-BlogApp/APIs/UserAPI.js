@@ -20,6 +20,16 @@ userApp.get('/articles',verifyToken("USER", "AUTHOR", "ADMIN"),async(req,res)=>{
     res.status(200).json({message:"All available Articles",payload:articlesList});
 })
 
+// read article by id
+userApp.get('/article/:articleId',verifyToken("USER", "AUTHOR", "ADMIN"),async(req,res)=>{
+    const articleId = req.params.articleId;
+    const articleDoc = await ArticleModel.findOne({_id:articleId,isArticleActive:true}).populate("comment.user");
+    if(!articleDoc){
+        return res.status(404).json({message:"Article not found"})
+    }
+    res.status(200).json({message:"Article found",payload:articleDoc})
+})
+
 // add a comment
 userApp.put('/articles',verifyToken("USER"),async(req,res)=>{
     // get req body

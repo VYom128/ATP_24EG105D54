@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import { useAuth } from "../stores/authStore";
 import { useState } from "react";
+import { useTheme } from "../stores/themeStore";
 
 import {
   navbarClass,
@@ -16,6 +17,7 @@ function Header() {
   const user = useAuth((state) => state.currentUser);
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const getProfilePath = () => {
     if (!user) return "/";
@@ -41,13 +43,24 @@ function Header() {
           MyBlog
         </NavLink>
 
-        {/* HAMBURGER (mobile only) */}
-        <button
-          className="md:hidden text-2xl"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          {/* THEME TOGGLE (mobile) */}
+          <button
+            onClick={toggleTheme}
+            className="text-text-claude hover:text-accent-claude transition-colors"
+            aria-label="Toggle Theme"
+          >
+            {isDarkMode ? "☀️" : "🌙"}
+          </button>
+          
+          {/* HAMBURGER (mobile only) */}
+          <button
+            className="text-2xl text-text-claude"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            ☰
+          </button>
+        </div>
 
         {/* NAV LINKS */}
         <ul
@@ -118,6 +131,17 @@ function Header() {
               </NavLink>
             </li>
           )}
+
+          {/* THEME TOGGLE (desktop) */}
+          <li className="hidden md:block">
+            <button
+              onClick={toggleTheme}
+              className="text-text-claude hover:text-accent-claude transition-colors ml-4"
+              aria-label="Toggle Theme"
+            >
+              {isDarkMode ? "☀️" : "🌙"}
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
