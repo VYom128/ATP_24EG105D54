@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+/* ─── DARK MODE (default) ───────────────────────────── */
+:root {
+  --bg: #0b0f19;
+  --surface: #151a2a;
+  --surface-hover: #181e2e;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: #222b40;
+  --border-hover: #334155;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-faint: rgba(99, 102, 241, 0.1);
+}
+
+/* ─── LIGHT MODE ─────────────────────────────────────── */
+[data-theme="light"] {
+  --bg: #fdfaf6;
+  --surface: #ffffff;
+  --surface-hover: #f7f4f0;
+  --text-primary: #1a1918;
+  --text-secondary: #57534e;
+  --text-muted: #a8a29e;
+  --border: #e7e5e4;
+  --border-hover: #d6d3d1;
+  --accent: #d95b43;
+  --accent-light: #e06c57;
+  --accent-faint: rgba(217, 91, 67, 0.1);
+}
+
+/* ─── BASE ───────────────────────────────────────────── */
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}

@@ -52,7 +52,7 @@ function WriteArticles() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-6 bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center px-4 py-6 bg-[#0b0f19]">
       
       {/* responsive card wrapper */}
       <div className={`${formCard} w-full max-w-md sm:max-w-lg md:max-w-2xl`}>
