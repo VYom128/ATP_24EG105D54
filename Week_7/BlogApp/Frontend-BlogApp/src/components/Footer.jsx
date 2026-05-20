@@ -40,18 +40,6 @@ function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3
-              className="font-bold tracking-wider uppercase text-xs mb-4"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Legal
-            </h3>
-            <ul className="space-y-3">
-              <li><a href="#" className="text-sm transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>Privacy Policy</a></li>
-              <li><a href="#" className="text-sm transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>Terms of Service</a></li>
-            </ul>
-          </div>
         </div>
 
         <div
