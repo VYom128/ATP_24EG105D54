@@ -30,19 +30,6 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-[#222b40] flex flex-col md:flex-row items-center justify-between">
-          <p className="text-[#64748b] text-sm">
-            &copy; {new Date().getFullYear()} MyBlog. All rights reserved.
-          </p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <div className="w-8 h-8 rounded-full bg-[#151a2a] border border-[#222b40] flex items-center justify-center text-[#94a3b8] hover:text-indigo-400 hover:border-indigo-500/50 cursor-pointer transition-all">
-              X
-            </div>
-            <div className="w-8 h-8 rounded-full bg-[#151a2a] border border-[#222b40] flex items-center justify-center text-[#94a3b8] hover:text-indigo-400 hover:border-indigo-500/50 cursor-pointer transition-all">
-              in
-            </div>
-          </div>
-        </div>
       </div>
     </footer>
   )
