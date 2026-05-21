@@ -8,7 +8,6 @@ function Home() {
 
   const handleExploreArticles = (e) => {
     e.preventDefault();
-    if (!isAuthenticated) { navigate("/login"); return; }
     navigate("/articles");
   };
 
