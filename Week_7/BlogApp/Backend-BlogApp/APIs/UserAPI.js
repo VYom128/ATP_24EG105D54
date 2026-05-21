@@ -5,6 +5,26 @@ import {UserModel} from '../models/UserModel.js'
 import {verifyToken} from '../middlewares/verifyToken.js'
 export const userApp = exp.Router()
 
+// ── PUBLIC routes (no auth required) ──
+
+// read all articles (public)
+userApp.get('/public/articles', async (req, res) => {
+    const articlesList = await ArticleModel.find({ isArticleActive: true });
+    res.status(200).json({ message: "All available Articles", payload: articlesList });
+})
+
+// read article by id (public)
+userApp.get('/public/article/:articleId', async (req, res) => {
+    const articleId = req.params.articleId;
+    const articleDoc = await ArticleModel.findOne({ _id: articleId, isArticleActive: true }).populate("comment.user");
+    if (!articleDoc) {
+        return res.status(404).json({ message: "Article not found" })
+    }
+    res.status(200).json({ message: "Article found", payload: articleDoc })
+})
+
+// ── AUTHENTICATED routes ──
+
 // read all article route
 userApp.get('/articles',verifyToken("USER", "AUTHOR", "ADMIN"),async(req,res)=>{
     // get id of the user

@@ -49,8 +49,7 @@ function ArticleByID() {
 
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/user-api/article/${id}`,
-          { withCredentials: true }
+          `${import.meta.env.VITE_API_URL}/user-api/public/article/${id}`
         );
 
         setArticle(res.data.payload);
@@ -143,7 +142,7 @@ function ArticleByID() {
         </h1>
 
         <div className={`${articleAuthorRow} flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm`}>
-          <div className={authorInfo}>✍ {user.role}</div>
+          <div className={authorInfo}>✍ {user?.role || "Reader"}</div>
           <div>{formatDate(article.createdAt)}</div>
         </div>
       </div>
@@ -190,6 +189,29 @@ function ArticleByID() {
 
           </form>
 
+        </div>
+      )}
+
+      {/* Login prompt for non-authenticated users */}
+      {!user && (
+        <div className={`${articleActions} mt-4`}>
+          <div
+            className="rounded-2xl p-6 text-center border border-dashed"
+            style={{ backgroundColor: "var(--surface)", borderColor: "var(--border)" }}
+          >
+            <p className="text-base font-medium mb-3" style={{ color: "var(--text-secondary)" }}>
+              Want to join the conversation?
+            </p>
+            <button
+              onClick={() => navigate("/login")}
+              className="px-6 py-2.5 rounded-2xl font-semibold text-white transition-all duration-200 cursor-pointer"
+              style={{ backgroundColor: "var(--accent)" }}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = "0.85"}
+              onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}
+            >
+              Login to Comment
+            </button>
+          </div>
         </div>
       )}
 
